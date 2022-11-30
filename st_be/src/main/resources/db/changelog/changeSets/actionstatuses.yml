@@ -1,0 +1,46 @@
+databaseChangeLog:
+  - changeSet:
+      id: 6
+      author: Todor Valkov
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          - tableExists:
+              - tableName: actionstatuses
+      changes:
+        - createTable:
+            tableName: actionstatuses
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: time_taken_state
+                  type: character varying(100)
+              - column:
+                  name: progress
+                  type: character varying(100)
+              - column:
+                  name: time_begin
+                  type: timestamp
+              - column:
+                  name: time_end
+                  type: timestamp
+              - column:
+                  name: action_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_action_id_actionstatuses
+                    references: actions(id)
+              - column:
+                  name: order_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_order_id_actionstatuses
+                    references: orders(id)

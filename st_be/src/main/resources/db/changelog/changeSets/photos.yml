@@ -1,0 +1,47 @@
+databaseChangeLog:
+  - changeSet:
+      id: 17
+      author: Todor Valkov
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          - tableExists:
+              - tableName: photos
+      changes:
+        - createTable:
+            tableName: photos
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: public_id
+                  type: character varying(100)
+              - column:
+                  name: secure_url
+                  type: character varying(100)
+              - column:
+                  name: created_at
+                  type: timestamp
+              - column:
+                  name: is_for_completed_product
+                  type: boolean
+              - column:
+                  name: order_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_photos_id_orders
+                    references: orders(id)
+  - changeSet:
+      id: 33
+      author: Todor Valkov
+      changes:
+        - modifyDataType:
+            tableName: photos
+            columnName: secure_url
+            newDataType: character varying(300)

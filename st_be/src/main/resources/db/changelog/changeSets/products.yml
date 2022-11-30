@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: Todor Valkov
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          - tableExists:
+              - tableName: products
+      changes:
+        - createTable:
+            tableName: products
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: character varying(100)
+              - column:
+                  name: description
+                  type: character varying(255)

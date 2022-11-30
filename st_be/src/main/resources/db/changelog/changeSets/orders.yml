@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: 4
+      author: Todor Valkov
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          - tableExists:
+              - tableName: orders
+      changes:
+        - createTable:
+            tableName: orders
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: priority
+                  type: character varying(100)
+              - column:
+                  name: order_number
+                  type: character varying(255)
+              - column:
+                  name: when_to_be_done
+                  type: timestamp
+              - column:
+                  name: description
+                  type: character varying(255)
+              - column:
+                  name: completed
+                  type: boolean
+              - column:
+                  name: product_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_product_id_orders
+                    references: products(id)

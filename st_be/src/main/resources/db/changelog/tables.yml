@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/changeSets/tenants.yml
+  - include:
+      file: db/changelog/changeSets/products.yml
+  - include:
+      file: db/changelog/changeSets/users.yml
+  - include:
+      file: db/changelog/changeSets/orders.yml
+  - include:
+      file: db/changelog/changeSets/actions.yml
+  - include:
+      file: db/changelog/changeSets/actionstatuses.yml
+  - include:
+      file: db/changelog/changeSets/actionstatuses_tenants.yml
+  - include:
+      file: db/changelog/changeSets/global_id_sequence.yml
+  - include:
+      file: db/changelog/changeSets/comments.yml
+  - include:
+      file: db/changelog/changeSets/tasks.yml
+  - include:
+      file: db/changelog/changeSets/tasks_tenants.yml
+  - include:
+      file: db/changelog/changeSets/stocks.yml
+  - include:
+      file: db/changelog/changeSets/photos.yml

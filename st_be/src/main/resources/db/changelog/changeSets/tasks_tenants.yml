@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 14
+      author: Todor Valkov
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          - tableExists:
+              - tableName: tasks_tenants
+      changes:
+        - createTable:
+            tableName: tasks_tenants
+            columns:
+              - column:
+                  name: tasks_id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: true
+                    references: tasks(id)
+                    foreignKeyName: fk_tasks_id_tasks_tenants
+              - column:
+                  name: tenant_id
+                  type: character varying(100)
+                  constraints:
+                    primaryKey: true
+                    nullable: true
+                    references: tenants(id)
+                    foreignKeyName: fk_tenants_id_tasks_tenants

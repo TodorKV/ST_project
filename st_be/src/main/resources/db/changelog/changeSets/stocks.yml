@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: 15
+      author: Todor Valkov
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          - tableExists:
+              - tableName: stocks
+      changes:
+        - createTable:
+            tableName: stocks
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: character varying(100)
+              - column:
+                  name: quantity
+                  type: int
+  - changeSet:
+      id: 16
+      author: Todor Valkov
+      changes:
+        - addColumn:
+            tableName: stocks
+            columns:
+              - column:
+                  name: category
+                  type: character varying(100)

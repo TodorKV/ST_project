@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Todor Valkov
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          - tableExists:
+              - tableName: tenants
+      changes:
+        - createTable:
+            tableName: tenants
+            columns:
+              - column:
+                  name: id
+                  type: character varying(100)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: tenant_value
+                  type: character varying(100)

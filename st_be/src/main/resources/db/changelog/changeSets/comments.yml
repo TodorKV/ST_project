@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: 12
+      author: Todor Valkov
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          - tableExists:
+              - tableName: comments
+      changes:
+        - createTable:
+            tableName: comments
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: time_sent
+                  type: character varying(100)
+              - column:
+                  name: comment
+                  type: character varying(1000)
+              - column:
+                  name: action_status_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_actionstatuses_id_comments
+                    references: actionstatuses(id)
+              - column:
+                  name: tenant_id
+                  type: character varying(100)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_tenants_id_comments
+                    references: tenants(id)

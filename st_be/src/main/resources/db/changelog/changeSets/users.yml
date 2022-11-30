@@ -1,0 +1,48 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: Todor Valkov
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          - tableExists:
+              - tableName: users
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: character varying(100)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: realname
+                  type: character varying(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: character varying(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role
+                  type: character varying(100))
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tenant_id
+                  type: character varying(100)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_tenant_id_users
+                    references: tenants(id)

@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 13
+      author: Todor Valkov
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          - tableExists:
+              - tableName: tasks
+      changes:
+        - createTable:
+            tableName: tasks
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: when_to_be_done
+                  type: timestamp
+              - column:
+                  name: description
+                  type: character varying(255)
+              - column:
+                  name: completed
+                  type: boolean

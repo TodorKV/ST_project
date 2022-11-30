@@ -1,0 +1,16 @@
+databaseChangeLog: 
+  - changeSet: 
+      id:  11
+      author:  Todor Valkov 
+      preConditions: 
+        onFail: MARK_RAN 
+        not: 
+          - sequenceExists: 
+            - sequenceName: global_id_sequence 
+      changes: 
+      -  createSequence:  
+          dataType: int  
+          incrementBy:  1
+          schemaName:  public  
+          sequenceName:  global_id_sequence  
+          startValue:  1 
