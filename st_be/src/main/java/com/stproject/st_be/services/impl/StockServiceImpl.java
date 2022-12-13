@@ -1,10 +1,10 @@
-package com.stproject.st_be.service.impl;
+package com.stproject.st_be.services.impl;
 
 import com.stproject.st_be.dto.StockDto;
 import com.stproject.st_be.entity.Stock;
 import com.stproject.st_be.mappers.StockMapper;
-import com.stproject.st_be.repository.StockRepository;
-import com.stproject.st_be.service.base.StockService;
+import com.stproject.st_be.repositories.StockRepository;
+import com.stproject.st_be.services.base.StockService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 

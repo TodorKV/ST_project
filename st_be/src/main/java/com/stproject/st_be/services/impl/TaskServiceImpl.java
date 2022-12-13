@@ -1,10 +1,10 @@
-package com.stproject.st_be.service.impl;
+package com.stproject.st_be.services.impl;
 
 import com.stproject.st_be.dto.TaskDto;
 import com.stproject.st_be.entity.Task;
 import com.stproject.st_be.mappers.TaskMapper;
-import com.stproject.st_be.repository.TaskRepository;
-import com.stproject.st_be.service.base.TaskService;
+import com.stproject.st_be.repositories.TaskRepository;
+import com.stproject.st_be.services.base.TaskService;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 

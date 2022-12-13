@@ -1,4 +1,4 @@
-package com.stproject.st_be.service.impl;
+package com.stproject.st_be.services.impl;
 
 import java.util.stream.Collectors;
 
@@ -7,8 +7,8 @@ import com.stproject.st_be.entity.User;
 import com.stproject.st_be.entity.enums.Role;
 import com.stproject.st_be.exception.NotFoundException;
 import com.stproject.st_be.mappers.UserMapper;
-import com.stproject.st_be.repository.UserRepository;
-import com.stproject.st_be.service.base.UserService;
+import com.stproject.st_be.repositories.UserRepository;
+import com.stproject.st_be.services.base.UserService;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

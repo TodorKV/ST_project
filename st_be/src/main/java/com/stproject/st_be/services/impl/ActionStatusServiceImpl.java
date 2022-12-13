@@ -1,4 +1,4 @@
-package com.stproject.st_be.service.impl;
+package com.stproject.st_be.services.impl;
 
 import com.stproject.st_be.dto.ActionDto;
 import com.stproject.st_be.dto.ActionStatusDto;
@@ -13,8 +13,8 @@ import com.stproject.st_be.exception.NotFoundException;
 import com.stproject.st_be.mappers.ActionMapper;
 import com.stproject.st_be.mappers.ActionStatusMapper;
 import com.stproject.st_be.mappers.OrderMapper;
-import com.stproject.st_be.repository.ActionStatusRepository;
-import com.stproject.st_be.service.base.ActionStatusService;
+import com.stproject.st_be.repositories.ActionStatusRepository;
+import com.stproject.st_be.services.base.ActionStatusService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 

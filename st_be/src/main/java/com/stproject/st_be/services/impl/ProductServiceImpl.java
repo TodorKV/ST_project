@@ -1,4 +1,4 @@
-package com.stproject.st_be.service.impl;
+package com.stproject.st_be.services.impl;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -11,9 +11,9 @@ import com.stproject.st_be.entity.Product;
 import com.stproject.st_be.exception.NotFoundException;
 import com.stproject.st_be.mappers.ActionMapper;
 import com.stproject.st_be.mappers.ProductMapper;
-import com.stproject.st_be.repository.ActionRepository;
-import com.stproject.st_be.repository.ProductRepository;
-import com.stproject.st_be.service.base.ProductService;
+import com.stproject.st_be.repositories.ActionRepository;
+import com.stproject.st_be.repositories.ProductRepository;
+import com.stproject.st_be.services.base.ProductService;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;

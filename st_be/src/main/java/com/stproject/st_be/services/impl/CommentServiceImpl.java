@@ -1,10 +1,10 @@
-package com.stproject.st_be.service.impl;
+package com.stproject.st_be.services.impl;
 
 import com.stproject.st_be.dto.CommentDto;
 import com.stproject.st_be.entity.Comment;
 import com.stproject.st_be.mappers.CommentMapper;
-import com.stproject.st_be.repository.CommentRepository;
-import com.stproject.st_be.service.base.CommentService;
+import com.stproject.st_be.repositories.CommentRepository;
+import com.stproject.st_be.services.base.CommentService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
