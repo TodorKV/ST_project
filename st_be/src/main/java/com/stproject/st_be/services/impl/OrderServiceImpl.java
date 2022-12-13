@@ -1,12 +1,12 @@
-package com.stproject.st_be.service.impl;
+package com.stproject.st_be.services.impl;
 
 import com.stproject.st_be.dto.ActionStatusDto;
 import com.stproject.st_be.dto.OrderDto;
 import com.stproject.st_be.entity.Order;
 import com.stproject.st_be.entity.enums.Progress;
 import com.stproject.st_be.mappers.OrderMapper;
-import com.stproject.st_be.repository.OrderRepository;
-import com.stproject.st_be.service.base.OrderService;
+import com.stproject.st_be.repositories.OrderRepository;
+import com.stproject.st_be.services.base.OrderService;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

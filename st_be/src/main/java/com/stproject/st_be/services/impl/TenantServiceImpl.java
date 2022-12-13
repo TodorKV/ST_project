@@ -1,6 +1,6 @@
-package com.stproject.st_be.service.impl;
+package com.stproject.st_be.services.impl;
 
-import com.stproject.st_be.service.base.TenantService;
+import com.stproject.st_be.services.base.TenantService;
 
 public class TenantServiceImpl implements TenantService {
 }

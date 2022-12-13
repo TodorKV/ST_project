@@ -1,11 +1,11 @@
-package com.stproject.st_be.service.impl;
+package com.stproject.st_be.services.impl;
 
 import com.stproject.st_be.dto.base.BaseDto;
 import com.stproject.st_be.entity.Order;
 import com.stproject.st_be.entity.base.BaseEntity;
 import com.stproject.st_be.exception.NotFoundException;
 import com.stproject.st_be.mappers.BaseMapper;
-import com.stproject.st_be.service.base.BaseService;
+import com.stproject.st_be.services.base.BaseService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.JpaRepository;
