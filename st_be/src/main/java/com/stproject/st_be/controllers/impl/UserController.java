@@ -1,9 +1,9 @@
 package com.stproject.st_be.controllers.impl;
 
-import com.ft.dto.PasswordEditionDto;
-import com.ft.dto.UserDto;
-import com.ft.entity.enums.Role;
-import com.ft.service.impl.UserServiceImpl;
+import com.stproject.st_be.dto.PasswordEditionDto;
+import com.stproject.st_be.dto.UserDto;
+import com.stproject.st_be.entity.enums.Role;
+import com.stproject.st_be.services.impl.UserServiceImpl;
 
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;

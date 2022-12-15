@@ -1,8 +1,8 @@
 package com.stproject.st_be.controllers.impl;
 
-import com.ft.controllers.base.BaseAbstrController;
-import com.ft.dto.ActionStatusDto;
-import com.ft.service.base.ActionStatusService;
+import com.stproject.st_be.controllers.base.BaseAbstrController;
+import com.stproject.st_be.dto.ActionStatusDto;
+import com.stproject.st_be.services.base.ActionStatusService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

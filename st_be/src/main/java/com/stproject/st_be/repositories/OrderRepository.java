@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
@@ -24,8 +25,8 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
                         "WHEN (o.priority = 'MEDIUM') THEN '3' " +
                         "WHEN (o.priority = 'LOW') THEN '4' " +
                         "END ASC, o.id DESC")
-        Page<Order> findByDescriptionIgnoreCaseContaining(String description, Pageable pageable, boolean isCompleted,
-                        Date dateBefore);
+        Page<Order> findByDescriptionIgnoreCaseContaining(@Param("description") String description, Pageable pageable,
+                        @Param("isCompleted") boolean isCompleted, @Param("dateBefore") Date dateBefore);
 
         @Query(value = "SELECT o " +
                         "FROM Order o " +
@@ -36,7 +37,8 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
                         "WHEN (o.priority = 'MEDIUM') THEN '3' " +
                         "WHEN (o.priority = 'LOW') THEN '4' " +
                         "END ASC, o.id DESC")
-        Page<Order> findAll(Pageable pageable, boolean isCompleted, Date dateBefore);
+        Page<Order> findAll(Pageable pageable, @Param("isCompleted") boolean isCompleted,
+                        @Param("dateBefore") Date dateBefore);
 
         @Query(value = "SELECT o " +
                         "FROM Order o " +
@@ -50,7 +52,8 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
                         "WHEN (o.priority = 'MEDIUM') THEN '3' " +
                         "WHEN (o.priority = 'LOW') THEN '4' " +
                         "END ASC, o.id DESC")
-        Page<Order> findAllWhereTenantId(String tenantid, Pageable pageable, Progress progress, Date dateBefore);
+        Page<Order> findAllWhereTenantId(@Param("tenantid") String tenantid, Pageable pageable,
+                        @Param("progress") Progress progress, @Param("dateBefore") Date dateBefore);
 
         @Query(value = "SELECT o " +
                         "FROM Order o " +
@@ -65,8 +68,10 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
                         "WHEN (o.priority = 'MEDIUM') THEN '3' " +
                         "WHEN (o.priority = 'LOW') THEN '4' " +
                         "END ASC, o.id DESC")
-        Page<Order> findAllWhereTenantIdAndDescription(String description, String tenantid, Pageable pageable,
-                        Progress progress, Date dateBefore);
+        Page<Order> findAllWhereTenantIdAndDescription(
+                        @Param("description") String description,
+                        @Param("tenantid") String tenantid, Pageable pageable,
+                        @Param("progress") Progress progress, @Param("dateBefore") Date dateBefore);
 
         @Query(value = "SELECT o " +
                         "FROM Order o " +

@@ -1,7 +1,7 @@
 package com.stproject.st_be.controllers.impl;
 
-import com.ft.dto.TaskDto;
-import com.ft.service.base.TaskService;
+import com.stproject.st_be.dto.TaskDto;
+import com.stproject.st_be.services.base.TaskService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -60,7 +60,8 @@ public class TaskController {
             @RequestParam(defaultValue = "10") Integer pageSize,
             @RequestParam(defaultValue = "id") String sortBy,
             @RequestParam(defaultValue = "") String description) {
-        Page<TaskDto> list = this.taskService.searchAllWhereTenantIdAndDescription(description, pageNo, pageSize, sortBy);
+        Page<TaskDto> list = this.taskService.searchAllWhereTenantIdAndDescription(description, pageNo, pageSize,
+                sortBy);
         return new ResponseEntity<>(list, new HttpHeaders(), HttpStatus.OK);
     }
 

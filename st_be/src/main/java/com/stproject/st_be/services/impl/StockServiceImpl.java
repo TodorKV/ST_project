@@ -14,7 +14,7 @@ public class StockServiceImpl extends BaseServiceAbstrImpl<StockDto, Stock> impl
     private final StockMapper mapper;
 
     public StockServiceImpl(StockRepository repository,
-                            StockMapper mapper) {
+            StockMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
         super.setMapper(mapper);

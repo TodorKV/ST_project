@@ -1,8 +1,8 @@
 package com.stproject.st_be.controllers.impl;
 
-import com.ft.controllers.base.BaseAbstrController;
-import com.ft.dto.ProductDto;
-import com.ft.service.base.ProductService;
+import com.stproject.st_be.controllers.base.BaseAbstrController;
+import com.stproject.st_be.dto.ProductDto;
+import com.stproject.st_be.services.base.ProductService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

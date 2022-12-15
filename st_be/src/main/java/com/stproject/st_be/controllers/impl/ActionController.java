@@ -1,7 +1,7 @@
 package com.stproject.st_be.controllers.impl;
 
-import com.ft.dto.ActionDto;
-import com.ft.service.impl.ActionServiceImpl;
+import com.stproject.st_be.dto.ActionDto;
+import com.stproject.st_be.services.impl.ActionServiceImpl;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

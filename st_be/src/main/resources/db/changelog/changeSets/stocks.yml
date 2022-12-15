@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 15
+      id: 22
       author: Todor Valkov
       preConditions:
         onFail: MARK_RAN
@@ -25,7 +25,7 @@ databaseChangeLog:
                   name: quantity
                   type: int
   - changeSet:
-      id: 16
+      id: 33
       author: Todor Valkov
       changes:
         - addColumn:
