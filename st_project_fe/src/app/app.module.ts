@@ -21,12 +21,23 @@ import { MatTableModule } from "@angular/material/table";
 import { MatStepperModule } from "@angular/material/stepper";
 import { TableFilteringExampleComponent } from "./components/table-filtering-example/table-filtering-example.component";
 import { ProductCreateComponent } from "./components/product/product-create/product-create.component";
+import { OrderStepperComponent } from "./components/order/order-stepper/order-stepper.component";
+import { OrderHistoryComponent } from "./components/order/order-history/order-history.component";
 import { UserEditComponent } from "./components/user-edit/user-edit.component";
 import { ProductListComponent } from "./components/product/product-list/product-list.component";
 import { ProductPageComponent } from "./components/product/product-page/product-page.component";
+import { OrderPageComponent } from "./components/order/order-page/order-page.component";
+import { ActionstatusesTableComponent } from "./components/order/actionstatuses-table/actionstatuses-table.component";
+import { ActionstatusesDialogComponent } from "./components/order/actionstatuses-dialog/actionstatuses-dialog.component";
 import { NgCircleProgressModule } from "ng-circle-progress";
 import { StompService } from "./services/stomp.service";
+import { CommentsDialogComponent } from "./components/order/comments-dialog/comments-dialog.component";
 import { MatNativeDateModule, MAT_DATE_LOCALE } from "@angular/material/core";
+import { GalleryComponent } from "./components/order/gallery/gallery.component";
+import { TaskPageComponent } from "./components/task/task-page/task-page.component";
+import { TaskHistoryComponent } from "./components/task/task-history/task-history.component";
+import { TaskCreateComponent } from "./components/task/task-create/task-create.component";
+import { LastphotoDialogComponent } from "./components/order/lastphoto-dialog/lastphoto-dialog.component";
 import { DateAdapter, MAT_DATE_FORMATS } from "@angular/material/core";
 import {
   MomentDateModule,
@@ -38,6 +49,10 @@ import { InterceptorService } from "./services/loader/interceptor.service";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { ErrorCatchingService } from "./services/error/error-catching.service";
 import { ErrorDialogComponent } from "./services/error/error-dialog/error-dialog.component";
+import { StockPageComponent } from "./components/stock/stock-page/stock-page.component";
+import { StockCreateComponent } from "./components/stock/stock-create/stock-create.component";
+import { StockHistoryComponent } from "./components/stock/stock-history/stock-history.component";
+import { StockEditDialogComponent } from "./components/stock/stock-edit-dialog/stock-edit-dialog.component";
 
 export const MY_FORMATS = {
   parse: {
@@ -61,11 +76,26 @@ export const MY_FORMATS = {
     DialogComponent,
     TableFilteringExampleComponent,
     ProductCreateComponent,
+    OrderStepperComponent,
+    OrderHistoryComponent,
     UserEditComponent,
     ProductListComponent,
     ProductPageComponent,
+    OrderPageComponent,
+    ActionstatusesTableComponent,
+    ActionstatusesDialogComponent,
+    CommentsDialogComponent,
+    GalleryComponent,
+    TaskPageComponent,
+    TaskHistoryComponent,
+    TaskCreateComponent,
+    LastphotoDialogComponent,
     NavComponent,
     ErrorDialogComponent,
+    StockPageComponent,
+    StockCreateComponent,
+    StockHistoryComponent,
+    StockEditDialogComponent,
   ],
   imports: [
     BrowserModule,
