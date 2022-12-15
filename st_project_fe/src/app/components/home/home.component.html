@@ -32,6 +32,44 @@
         >
           <mat-icon>how_to_vote</mat-icon> Продукти
         </mat-button-toggle>
+        <mat-button-toggle
+          *ngIf="data?.role == 'ADMIN'"
+          [value]="toggleEnum.NewOrder"
+        >
+          <mat-icon>description</mat-icon> Поръчки
+        </mat-button-toggle>
+        <mat-button-toggle
+          *ngIf="data?.role == 'ADMIN'"
+          [value]="toggleEnum.NewTask"
+        >
+          <mat-icon>dashboard</mat-icon> Задачи
+        </mat-button-toggle>
+        <mat-button-toggle
+          *ngIf="data?.role == 'ADMIN'"
+          [value]="toggleEnum.Stock"
+        >
+          <mat-icon>assignment</mat-icon> Наличност
+        </mat-button-toggle>
+        <mat-button-toggle
+          style="margin: 20px"
+          *ngIf="data?.role != 'ADMIN'"
+          [value]="toggleEnum.MyOrders"
+          matBadge="{{ this.newOrderCount }}"
+          [matBadgeHidden]="this.newOrderCount == 0"
+          matBadgePosition="after"
+          matBadgeColor="accent"
+          >Моите Поръчки
+        </mat-button-toggle>
+        <mat-button-toggle
+          style="margin: 20px"
+          *ngIf="data?.role != 'ADMIN'"
+          [value]="toggleEnum.MyTasks"
+          matBadge="{{ this.newTaskCount }}"
+          [matBadgeHidden]="this.newTaskCount == 0"
+          matBadgePosition="after"
+          matBadgeColor="accent"
+          >Моите Задачи
+        </mat-button-toggle>
       </mat-button-toggle-group>
     </div>
   </mat-drawer>
