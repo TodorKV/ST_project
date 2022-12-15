@@ -1,0 +1,57 @@
+<!-- Toolbar -->
+<mat-toolbar *ngIf="isHome" id="home-header">
+  <span class="example-spacer"></span>
+  <div>
+    <span
+      style="font-size: 15px; margin-right: 10px; color: #46de00"
+      matTooltip="{{ data?.username }}"
+    >
+      {{ data?.realname }}, {{ data?.role }}</span
+    >
+  </div>
+  <span class="nav-tool-items" style="color: #46de00">
+    <dialog-content-example
+      *ngIf="data?.role == 'ADMIN'"
+    ></dialog-content-example>
+    <button mat-button [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="edit()">
+        <mat-icon>edit</mat-icon>Редактирай
+      </button>
+      <button *ngIf="data?.role == 'ADMIN'" mat-menu-item (click)="addPerson()">
+        <mat-icon>group_add</mat-icon>Регистрирай
+      </button>
+      <button mat-menu-item (click)="logOut()">
+        <mat-icon>exit_to_app</mat-icon>Изход
+      </button>
+    </mat-menu>
+  </span>
+</mat-toolbar>
+<!-- Toolbar -->
+<mat-toolbar
+  *ngIf="!isHome"
+  class="app-header"
+  fxLayout="row"
+  fxLayoutAlign="center center"
+>
+  <div>
+    <a
+      href="/"
+      class="positronx"
+      style="
+        text-align: center;
+        font-family: Leckerli One;
+        font-size: 40px;
+        margin-right: 5px;
+        margin-left: 5px;
+      "
+      >ST_PROJECT_FE</a
+    >
+  </div>
+  <!-- <span class="nav-tool-items">
+      <a mat-button routerLink="../login" routerLinkActive="active">Log in</a>
+      <a mat-button mat-raised-button routerLink="../register" routerLinkActive="active">Register</a>
+    </span> -->
+</mat-toolbar>
