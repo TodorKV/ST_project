@@ -16,6 +16,6 @@ public interface OrderService extends BaseService<OrderDto> {
 
         Page<OrderDto> searchAllWhereTenantIdAndDescription(String description, Integer pageNo, Integer pageSize,
                         String sortBy);
-                        
+
         List<OrderDto> findAllCompleted();
 }

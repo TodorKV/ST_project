@@ -2,7 +2,7 @@ package com.stproject.st_be.controllers.socket;
 
 import java.security.Principal;
 
-import com.ft.dto.ResponseMessageDto;
+import com.stproject.st_be.dto.ResponseMessageDto;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

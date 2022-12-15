@@ -5,10 +5,10 @@ spring:
     ansi:
       enabled: always
   datasource:
-    #postgresql://containers-us-west-72.railway.app:6428/railway
-    url: jdbc:postgresql://localhost:5432/stdb
+    #postgresql://postgres:uYXiF76hTkbhBflVhKFZ@containers-us-west-146.railway.app:6854/railway
+    url: jdbc:postgresql://containers-us-west-146.railway.app:6854/railway
     username: postgres
-    password: root
+    password: uYXiF76hTkbhBflVhKFZ
   liquibase:
     change-log: classpath:db/changelog/db-changelog.yml
   jpa:
@@ -22,10 +22,6 @@ spring:
     rest:
       base-path: "/api/v2"
       detection-strategy: annotated
-  web:
-    resources:
-      static-locations:
-        - file:src/main/resources/order-photos
 
 springdoc:
   swagger-ui:

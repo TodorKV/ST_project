@@ -1,8 +1,8 @@
-package ccom.stproject.st_be.controllers.impl;
+package com.stproject.st_be.controllers.impl;
 
-import com.ft.controllers.base.BaseAbstrController;
-import com.ft.dto.CommentDto;
-import com.ft.service.base.BaseService;
+import com.stproject.st_be.controllers.base.BaseAbstrController;
+import com.stproject.st_be.dto.CommentDto;
+import com.stproject.st_be.services.base.BaseService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

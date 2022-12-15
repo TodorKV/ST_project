@@ -1,8 +1,8 @@
 package com.stproject.st_be.controllers.impl;
 
-import com.ft.dto.OrderDto;
-import com.ft.dto.PhotoDto;
-import com.ft.service.base.OrderService;
+import com.stproject.st_be.dto.OrderDto;
+import com.stproject.st_be.dto.PhotoDto;
+import com.stproject.st_be.services.base.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;

@@ -94,8 +94,10 @@ public class ActionStatusServiceImpl extends BaseServiceAbstrImpl<ActionStatusDt
             target.setTimeEnd(timeEnd);
 
             long timeTakenInMilliseconds = Math.abs(timeEnd.getTime() - timeBegin.getTime());
-            long expectedTimeInMilliseconds = TimeUnit.MILLISECONDS.convert(target.getAction().getExpectedMinutes(), TimeUnit.MINUTES);
-            long allowedExceedTimeInMilliseconds = TimeUnit.MILLISECONDS.convert(EXCEEDED_MINUTES_FOR_YELLOW_FLAG, TimeUnit.MINUTES);
+            long expectedTimeInMilliseconds = TimeUnit.MILLISECONDS.convert(target.getAction().getExpectedMinutes(),
+                    TimeUnit.MINUTES);
+            long allowedExceedTimeInMilliseconds = TimeUnit.MILLISECONDS.convert(EXCEEDED_MINUTES_FOR_YELLOW_FLAG,
+                    TimeUnit.MINUTES);
 
             if (timeTakenInMilliseconds <= expectedTimeInMilliseconds) {
                 target.setTimeTakenState(TimeTakenState.GREEN);
