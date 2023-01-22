@@ -1,5 +1,7 @@
 package com.stproject.st_be.controllers.impl;
 
+import com.stproject.st_be.dto.AverageTenantTaskOverdueDto;
+import com.stproject.st_be.dto.SelectedTenantIdsDto;
 import com.stproject.st_be.dto.TaskDto;
 import com.stproject.st_be.services.base.TaskService;
 import org.springframework.data.domain.Page;
@@ -7,6 +9,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.Instant;
+import java.util.Date;
 
 @RestController
 @RequestMapping("api/v1/task")
@@ -65,10 +70,33 @@ public class TaskController {
         return new ResponseEntity<>(list, new HttpHeaders(), HttpStatus.OK);
     }
 
+    @GetMapping("/overdue/tenant/{tenantId}")
+    public ResponseEntity<Page<TaskDto>> findAllOverdueTasksForTenant(@RequestParam(defaultValue = "0") Integer pageNo,
+                                                                      @RequestParam(defaultValue = "10") Integer pageSize,
+                                                                      @PathVariable String tenantId) {
+
+        Page<TaskDto> overdueTasks = this.taskService.getAllOverdueTasksWhereTenantId(pageNo, pageSize, tenantId);
+
+        return new ResponseEntity<>(overdueTasks, HttpStatus.OK);
+    }
+
+    @GetMapping("/overdue/tenants/average-statistics")
+    public ResponseEntity<Page<AverageTenantTaskOverdueDto>> findAllOverdueTasksAverageStatisticsForTenants(
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestBody SelectedTenantIdsDto dto) {
+
+        Page<AverageTenantTaskOverdueDto> averageOverdueTasksForTenants = this.taskService
+                .getOverdueTasksAverageStatisticsForTenants(pageNo, pageSize, dto.getTenantIds());
+
+        return new ResponseEntity<>(averageOverdueTasksForTenants, HttpStatus.OK);
+    }
+
     @PutMapping("finish/{id}")
     public ResponseEntity finish(@PathVariable("id") Integer id) {
         TaskDto targetTask = taskService.findById(id);
         targetTask.setCompleted(true);
+        targetTask.setFinishedOnDate(Date.from(Instant.now()));
 
         taskService.save(targetTask);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
