@@ -1,5 +1,11 @@
 databaseChangeLog:
-  - include:
-      file: db/changelog/tables.yml
-  - include:
-      file: db/changelog/task_finished_date_column.yml
+  - changeSet:
+      id: 20
+      author: Vladi
+      changes:
+        - addColumn:
+            tableName: tasks
+            columns:
+              - column:
+                  name: finished_on_date
+                  type: timestampk_finished_date_column.yml
