@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20
+      author: Vladi
+      changes:
+        - addColumn:
+            tableName: tasks
+            columns:
+              - column:
+                  name: finished_on_date
+                  type: timestampk_finished_date_column.yml

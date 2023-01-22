@@ -18,8 +18,14 @@ import java.util.Set;
 public class TaskDto extends BaseDto {
 
     private String description;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private Date whenToBeDone;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    private Date finishedOnDate;
+
     private boolean completed;
-    private Set<TenantDto> tenants = new HashSet<TenantDto>();
+
+    private Set<TenantDto> tenants = new HashSet<>();
 }
