@@ -14,45 +14,46 @@ import java.util.List;
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Integer> {
 
-        @Query(value = "SELECT o " +
-                        "FROM Task o " +
-                        "WHERE o.description LIKE %:description% AND o.completed = :isCompleted AND o.whenToBeDone < :dateBefore "
-                        +
-                        "ORDER BY o.id DESC")
-        Page<Task> findByDescriptionIgnoreCaseContaining(@Param("description") String description, Pageable pageable,
-                        @Param("isCompleted") boolean isCompleted, @Param("dateBefore") Date dateBefore);
+    @Query(value = "SELECT o " +
+            "FROM Task o " +
+            "WHERE o.description LIKE %:description% AND o.completed = :isCompleted AND o.whenToBeDone < :dateBefore "
+            +
+            "ORDER BY o.id DESC")
+    Page<Task> findByDescriptionIgnoreCaseContaining(@Param("description") String description, Pageable pageable,
+                                                     @Param("isCompleted") boolean isCompleted, @Param("dateBefore") Date dateBefore);
 
-        @Query(value = "SELECT o " +
-                        "FROM Task o " +
-                        "WHERE o.completed = :isCompleted AND o.whenToBeDone < :dateBefore " +
-                        "ORDER BY o.id DESC")
-        Page<Task> findAll(Pageable pageable, @Param("isCompleted") boolean isCompleted,
-                        @Param("dateBefore") Date dateBefore);
+    @Query(value = "SELECT o " +
+            "FROM Task o " +
+            "WHERE o.completed = :isCompleted AND o.whenToBeDone < :dateBefore " +
+            "ORDER BY o.id DESC")
+    Page<Task> findAll(Pageable pageable, @Param("isCompleted") boolean isCompleted,
+                       @Param("dateBefore") Date dateBefore);
 
-        @Query(value = "SELECT o " +
-                        "FROM Task o " +
-                        "JOIN o.tenants t " +
-                        "WHERE o.completed = :isCompleted AND t.id = :tenantid AND o.whenToBeDone < :dateBefore " +
-                        "GROUP BY o.id " +
-                        "ORDER BY o.id DESC")
-        Page<Task> findAllWhereTenantId(
-                        @Param("tenantid") String tenantid, Pageable pageable,
-                        @Param("dateBefore") Date dateBefore, @Param("isCompleted") boolean isCompleted);
+    @Query(value = "SELECT o " +
+            "FROM Task o " +
+            "JOIN o.tenants t " +
+            "WHERE o.completed = :isCompleted AND t.id = :tenantid AND o.whenToBeDone < :dateBefore " +
+            "GROUP BY o.id " +
+            "ORDER BY o.id DESC")
+    Page<Task> findAllWhereTenantId(
+            @Param("tenantid") String tenantid, Pageable pageable,
+            @Param("dateBefore") Date dateBefore, @Param("isCompleted") boolean isCompleted);
 
-        @Query(value = "SELECT o " +
-                        "FROM Task o " +
-                        "JOIN o.tenants t " +
-                        "WHERE o.completed = :isCompleted AND t.id = :tenantid AND o.description LIKE %:description% AND o.whenToBeDone < :dateBefore "
-                        +
-                        "GROUP BY o.id " +
-                        "ORDER BY o.id DESC")
-        Page<Task> findAllWhereTenantIdAndDescription(
-                        @Param("description") String description,
-                        @Param("tenantid") String tenantid, Pageable pageable,
-                        @Param("dateBefore") Date dateBefore, @Param("isCompleted") boolean isCompleted);
-        @Query(value = "SELECT task " +
-                "FROM Task task " +
-                "JOIN task.tenants t " +
-                "WHERE t.id = :tenantId AND task.whenToBeDone < task.finishedOnDate")
-        List<Task> findAllOverdueTasksWhereTenantId(@Param("tenantId") String tenantId);
+    @Query(value = "SELECT o " +
+            "FROM Task o " +
+            "JOIN o.tenants t " +
+            "WHERE o.completed = :isCompleted AND t.id = :tenantid AND o.description LIKE %:description% AND o.whenToBeDone < :dateBefore "
+            +
+            "GROUP BY o.id " +
+            "ORDER BY o.id DESC")
+    Page<Task> findAllWhereTenantIdAndDescription(
+            @Param("description") String description,
+            @Param("tenantid") String tenantid, Pageable pageable,
+            @Param("dateBefore") Date dateBefore, @Param("isCompleted") boolean isCompleted);
+
+    @Query(value = "SELECT task " +
+            "FROM Task task " +
+            "JOIN task.tenants t " +
+            "WHERE t.id = :tenantId AND task.whenToBeDone < task.finishedOnDate")
+    List<Task> findAllOverdueTasksWhereTenantId(@Param("tenantId") String tenantId);
 }
