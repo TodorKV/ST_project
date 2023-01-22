@@ -23,6 +23,9 @@ public class Task extends BaseEntity {
     private Date whenToBeDone;
 
     @Column
+    private Date finishedOnDate;
+
+    @Column
     private String description;
 
     @Column
@@ -30,5 +33,12 @@ public class Task extends BaseEntity {
 
     @ManyToMany
     @JoinTable(name = "tasks_tenants", joinColumns = @JoinColumn(name = "tasks_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "tenant_id", referencedColumnName = "id"))
-    private Set<Tenant> tenants = new HashSet<Tenant>();
+    private Set<Tenant> tenants = new HashSet<>();
+
+    public Boolean isTaskOverdue() {
+        if (whenToBeDone != null && finishedOnDate != null) {
+            return finishedOnDate.after(whenToBeDone);
+        }
+        return false;
+    }
 }

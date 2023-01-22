@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
+import java.util.List;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Integer> {
@@ -49,4 +50,9 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
                         @Param("description") String description,
                         @Param("tenantid") String tenantid, Pageable pageable,
                         @Param("dateBefore") Date dateBefore, @Param("isCompleted") boolean isCompleted);
+        @Query(value = "SELECT task " +
+                "FROM Task task " +
+                "JOIN task.tenants t " +
+                "WHERE t.id = :tenantId AND task.whenToBeDone < task.finishedOnDate")
+        List<Task> findAllOverdueTasksWhereTenantId(@Param("tenantId") String tenantId);
 }
