@@ -4,6 +4,7 @@ import com.stproject.st_be.dto.AverageTenantTaskOverdueDto;
 import com.stproject.st_be.dto.TaskDto;
 import com.stproject.st_be.entity.Task;
 import com.stproject.st_be.mappers.TaskMapper;
+import com.stproject.st_be.projections.TaskProjection;
 import com.stproject.st_be.repositories.TaskRepository;
 import com.stproject.st_be.services.base.TaskService;
 import com.stproject.st_be.utils.OverdueTaskComparator;
@@ -118,26 +119,22 @@ public class TaskServiceImpl extends BaseServiceAbstrImpl<TaskDto, Task> impleme
     }
 
     @Override
-    public Page<AverageTenantTaskOverdueDto> getOverdueTasksAverageStatisticsForTenants(Integer pageNo,
-                                                                                        Integer pageSize,
-                                                                                        List<String> tenantIds) {
-        Pageable pageable = PageRequest.of(pageNo, pageSize);
+    public AverageTenantTaskOverdueDto getOverdueTasksAverageStatisticsForTenants(String tenantId) {
 
         List<AverageTenantTaskOverdueDto> list = new ArrayList<>();
 
-        for (String tenantId : tenantIds) {
-            List<Task> taskEntitiesPerTenant = taskRepository.findAllOverdueTasksWhereTenantId(tenantId);
+            var taskEntitiesPerTenant = taskRepository.findAllOverdueTasksWhereTenantId(tenantId);
 
             BigInteger averageOverduePerTenant = getAverageOverduePerTenant(taskEntitiesPerTenant);
 
-            list.add(new AverageTenantTaskOverdueDto(tenantId, averageOverduePerTenant.longValue()));
-        }
-
-
-        return new PageImpl<>(list, pageable, list.size());
+        return new AverageTenantTaskOverdueDto(tenantId, averageOverduePerTenant.longValue());
     }
 
-    private BigInteger getAverageOverduePerTenant(List<Task> taskEntitiesPerTenant) {
+    private BigInteger getAverageOverduePerTenant(List<TaskProjection> taskEntitiesPerTenant) {
+        if(taskEntitiesPerTenant.isEmpty()){
+            return BigInteger.ZERO;
+        }
+
         return taskEntitiesPerTenant.stream()
                 .map(task -> Period.between(task.getWhenToBeDone().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
                         task.getFinishedOnDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()).getDays())

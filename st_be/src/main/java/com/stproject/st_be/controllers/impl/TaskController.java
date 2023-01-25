@@ -80,14 +80,11 @@ public class TaskController {
         return new ResponseEntity<>(overdueTasks, HttpStatus.OK);
     }
 
-    @GetMapping("/overdue/tenants/average-statistics")
-    public ResponseEntity<Page<AverageTenantTaskOverdueDto>> findAllOverdueTasksAverageStatisticsForTenants(
-            @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "10") Integer pageSize,
-            @RequestBody SelectedTenantIdsDto dto) {
+    @GetMapping("/overdue/tenant/average-statistics/{tenantId}")
+    public ResponseEntity<AverageTenantTaskOverdueDto> findAllOverdueTasksAverageStatisticsForTenants(@PathVariable String tenantId) {
 
-        Page<AverageTenantTaskOverdueDto> averageOverdueTasksForTenants = this.taskService
-                .getOverdueTasksAverageStatisticsForTenants(pageNo, pageSize, dto.getTenantIds());
+        AverageTenantTaskOverdueDto averageOverdueTasksForTenants = this.taskService
+                .getOverdueTasksAverageStatisticsForTenants(tenantId);
 
         return new ResponseEntity<>(averageOverdueTasksForTenants, HttpStatus.OK);
     }

@@ -20,7 +20,5 @@ public interface TaskService extends BaseService<TaskDto> {
 
     Page<TaskDto> getAllOverdueTasksWhereTenantId(Integer pageNo, Integer pageSize, String tenantID);
 
-    Page<AverageTenantTaskOverdueDto> getOverdueTasksAverageStatisticsForTenants(Integer pageNo,
-                                                                                 Integer pageSize,
-                                                                                 List<String> tenantIds);
+    AverageTenantTaskOverdueDto getOverdueTasksAverageStatisticsForTenants(String tenantId);
 }
