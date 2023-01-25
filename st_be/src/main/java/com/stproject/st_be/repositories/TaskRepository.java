@@ -1,7 +1,6 @@
 package com.stproject.st_be.repositories;
 
 import com.stproject.st_be.entity.Task;
-import com.stproject.st_be.projections.TaskProjection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -52,15 +51,9 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
             @Param("tenantid") String tenantid, Pageable pageable,
             @Param("dateBefore") Date dateBefore, @Param("isCompleted") boolean isCompleted);
 
-    @Query(value = "SELECT " +
-            "tsk.description, " +
-            "tsk.when_to_be_done, " +
-            "tsk.finished_on_date, " +
-            "u.username " +
-            "FROM tasks AS tsk " +
-            "JOIN tasks_tenants AS tsktnt ON tsktnt.tasks_id = tsk.id " +
-            "JOIN tenants AS tnt ON tnt.id = tsktnt.tenant_id " +
-            "JOIN users AS u ON u.tenant_id = tnt.id " +
-            "WHERE tsk.when_to_be_done < tsk.finished_on_date ", nativeQuery = true)
-    List<TaskProjection> findAllOverdueTasksWhereTenantId(@Param("tenantId") String tenantId);
+    @Query(value = "SELECT task " +
+            "FROM Task task " +
+            "JOIN task.tenants tenants " +
+            "WHERE tenants.id = :tenantId AND task.whenToBeDone < task.finishedOnDate ")
+    List<Task> findAllOverdueTasksWhereTenantId(@Param("tenantId") String tenantId);
 }

@@ -1,13 +1,12 @@
 package com.stproject.st_be.services.impl;
 
 import com.stproject.st_be.dto.AverageTenantTaskOverdueDto;
+import com.stproject.st_be.dto.OverdueTaskDto;
 import com.stproject.st_be.dto.TaskDto;
 import com.stproject.st_be.entity.Task;
 import com.stproject.st_be.mappers.TaskMapper;
-import com.stproject.st_be.projections.TaskProjection;
 import com.stproject.st_be.repositories.TaskRepository;
 import com.stproject.st_be.services.base.TaskService;
-import com.stproject.st_be.utils.OverdueTaskComparator;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
@@ -97,22 +96,19 @@ public class TaskServiceImpl extends BaseServiceAbstrImpl<TaskDto, Task> impleme
                 paging, createDateBeforeFlag(), false);
         List<TaskDto> tasks = pagedSearchResult.getContent().stream().map(taskMapper::toDto)
                 .collect(Collectors.toList());
-        Page<TaskDto> dtoPagedResult = new PageImpl<>(
+
+        return new PageImpl<>(
                 tasks,
                 paging,
                 pagedSearchResult.getTotalElements());
-
-        return dtoPagedResult;
     }
 
     @Override
-    public Page<TaskDto> getAllOverdueTasksWhereTenantId(Integer pageNo, Integer pageSize, String tenantId) {
-        List<Task> taskEntitiesPerTenant = taskRepository.findAllOverdueTasksWhereTenantId(tenantId).stream()
-                .sorted(new OverdueTaskComparator())
-                .collect(Collectors.toList());
+    public Page<OverdueTaskDto> getAllOverdueTasksWhereTenantId(Integer pageNo, Integer pageSize, String tenantId) {
+        List<Task> taskEntitiesPerTenant = new ArrayList<>(taskRepository.findAllOverdueTasksWhereTenantId(tenantId));
 
-        List<TaskDto> overdueTaskDtosList = taskEntitiesPerTenant.stream()
-                .map(taskMapper::toDto)
+        var overdueTaskDtosList = taskEntitiesPerTenant.stream()
+                .map(task -> new OverdueTaskDto(task.getDescription(), task.getWhenToBeDone(), task.getFinishedOnDate(), tenantId))
                 .collect(Collectors.toList());
 
         return new PageImpl<>(overdueTaskDtosList, PageRequest.of(pageNo, pageSize), taskEntitiesPerTenant.size());
@@ -121,16 +117,14 @@ public class TaskServiceImpl extends BaseServiceAbstrImpl<TaskDto, Task> impleme
     @Override
     public AverageTenantTaskOverdueDto getOverdueTasksAverageStatisticsForTenants(String tenantId) {
 
-        List<AverageTenantTaskOverdueDto> list = new ArrayList<>();
+        var taskEntitiesPerTenant = taskRepository.findAllOverdueTasksWhereTenantId(tenantId);
 
-            var taskEntitiesPerTenant = taskRepository.findAllOverdueTasksWhereTenantId(tenantId);
-
-            BigInteger averageOverduePerTenant = getAverageOverduePerTenant(taskEntitiesPerTenant);
+        BigInteger averageOverduePerTenant = getAverageOverduePerTenant(taskEntitiesPerTenant);
 
         return new AverageTenantTaskOverdueDto(tenantId, averageOverduePerTenant.longValue());
     }
 
-    private BigInteger getAverageOverduePerTenant(List<TaskProjection> taskEntitiesPerTenant) {
+    private BigInteger getAverageOverduePerTenant(List<Task> taskEntitiesPerTenant) {
         if(taskEntitiesPerTenant.isEmpty()){
             return BigInteger.ZERO;
         }

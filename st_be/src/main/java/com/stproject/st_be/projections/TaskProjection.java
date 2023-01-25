@@ -1,8 +1,10 @@
 package com.stproject.st_be.projections;
 
+import java.sql.Date;
+
 public interface TaskProjection {
     String getDescription();
-    String getWhenToBeDone();
-    String getFinishedOnDate();
+    Date getWhenToBeDone();
+    Date getFinishedOnDate();
     String getUsername();
 }
