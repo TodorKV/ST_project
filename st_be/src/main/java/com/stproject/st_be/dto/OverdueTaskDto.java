@@ -13,5 +13,5 @@ public class OverdueTaskDto {
     private String description;
     private Date whenToBeDone;
     private Date finishedOnDate;
-    private String username;
+    private String realName;
 }

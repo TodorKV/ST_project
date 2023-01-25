@@ -4,6 +4,8 @@ import com.stproject.st_be.dto.AverageTenantTaskOverdueDto;
 import com.stproject.st_be.dto.OverdueTaskDto;
 import com.stproject.st_be.dto.TaskDto;
 import com.stproject.st_be.entity.Task;
+import com.stproject.st_be.entity.Tenant;
+import com.stproject.st_be.entity.User;
 import com.stproject.st_be.mappers.TaskMapper;
 import com.stproject.st_be.repositories.TaskRepository;
 import com.stproject.st_be.services.base.TaskService;
@@ -13,10 +15,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigInteger;
 import java.time.Period;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -107,8 +106,16 @@ public class TaskServiceImpl extends BaseServiceAbstrImpl<TaskDto, Task> impleme
     public Page<OverdueTaskDto> getAllOverdueTasksWhereTenantId(Integer pageNo, Integer pageSize, String tenantId) {
         List<Task> taskEntitiesPerTenant = new ArrayList<>(taskRepository.findAllOverdueTasksWhereTenantId(tenantId));
 
+        String realName  = taskEntitiesPerTenant.stream()
+                .map(Task::getTenants)
+                .flatMap(Collection::stream)
+                .map(Tenant::getUser)
+                .map(User::getRealname)
+                .findFirst()
+                .get();
+
         var overdueTaskDtosList = taskEntitiesPerTenant.stream()
-                .map(task -> new OverdueTaskDto(task.getDescription(), task.getWhenToBeDone(), task.getFinishedOnDate(), tenantId))
+                .map(task -> new OverdueTaskDto(task.getDescription(), task.getWhenToBeDone(), task.getFinishedOnDate(), realName))
                 .collect(Collectors.toList());
 
         return new PageImpl<>(overdueTaskDtosList, PageRequest.of(pageNo, pageSize), taskEntitiesPerTenant.size());
