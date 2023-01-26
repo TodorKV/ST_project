@@ -1,7 +1,7 @@
 package com.stproject.st_be.controllers.impl;
 
 import com.stproject.st_be.dto.AverageTenantTaskOverdueDto;
-import com.stproject.st_be.dto.SelectedTenantIdsDto;
+import com.stproject.st_be.dto.OverdueTaskDto;
 import com.stproject.st_be.dto.TaskDto;
 import com.stproject.st_be.services.base.TaskService;
 import org.springframework.data.domain.Page;
@@ -71,23 +71,20 @@ public class TaskController {
     }
 
     @GetMapping("/overdue/tenant/{tenantId}")
-    public ResponseEntity<Page<TaskDto>> findAllOverdueTasksForTenant(@RequestParam(defaultValue = "0") Integer pageNo,
-                                                                      @RequestParam(defaultValue = "10") Integer pageSize,
-                                                                      @PathVariable String tenantId) {
+    public ResponseEntity<Page<OverdueTaskDto>> findAllOverdueTasksForTenant(@RequestParam(defaultValue = "0") Integer pageNo,
+                                                                             @RequestParam(defaultValue = "10") Integer pageSize,
+                                                                             @PathVariable String tenantId) {
 
-        Page<TaskDto> overdueTasks = this.taskService.getAllOverdueTasksWhereTenantId(pageNo, pageSize, tenantId);
+        Page<OverdueTaskDto> overdueTasks = this.taskService.getAllOverdueTasksWhereTenantId(pageNo, pageSize, tenantId);
 
         return new ResponseEntity<>(overdueTasks, HttpStatus.OK);
     }
 
-    @GetMapping("/overdue/tenants/average-statistics")
-    public ResponseEntity<Page<AverageTenantTaskOverdueDto>> findAllOverdueTasksAverageStatisticsForTenants(
-            @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "10") Integer pageSize,
-            @RequestBody SelectedTenantIdsDto dto) {
+    @GetMapping("/overdue/tenant/average-statistics/{tenantId}")
+    public ResponseEntity<AverageTenantTaskOverdueDto> findAllOverdueTasksAverageStatisticsForTenants(@PathVariable String tenantId) {
 
-        Page<AverageTenantTaskOverdueDto> averageOverdueTasksForTenants = this.taskService
-                .getOverdueTasksAverageStatisticsForTenants(pageNo, pageSize, dto.getTenantIds());
+        AverageTenantTaskOverdueDto averageOverdueTasksForTenants = this.taskService
+                .getOverdueTasksAverageStatisticsForTenants(tenantId);
 
         return new ResponseEntity<>(averageOverdueTasksForTenants, HttpStatus.OK);
     }

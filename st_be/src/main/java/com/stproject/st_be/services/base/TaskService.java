@@ -1,10 +1,9 @@
 package com.stproject.st_be.services.base;
 
 import com.stproject.st_be.dto.AverageTenantTaskOverdueDto;
+import com.stproject.st_be.dto.OverdueTaskDto;
 import com.stproject.st_be.dto.TaskDto;
 import org.springframework.data.domain.Page;
-
-import java.util.List;
 
 public interface TaskService extends BaseService<TaskDto> {
 
@@ -18,9 +17,7 @@ public interface TaskService extends BaseService<TaskDto> {
     Page<TaskDto> searchAllWhereTenantIdAndDescription(String description, Integer pageNo, Integer pageSize,
                                                        String sortBy);
 
-    Page<TaskDto> getAllOverdueTasksWhereTenantId(Integer pageNo, Integer pageSize, String tenantID);
+    Page<OverdueTaskDto> getAllOverdueTasksWhereTenantId(Integer pageNo, Integer pageSize, String tenantID);
 
-    Page<AverageTenantTaskOverdueDto> getOverdueTasksAverageStatisticsForTenants(Integer pageNo,
-                                                                                 Integer pageSize,
-                                                                                 List<String> tenantIds);
+    AverageTenantTaskOverdueDto getOverdueTasksAverageStatisticsForTenants(String tenantId);
 }

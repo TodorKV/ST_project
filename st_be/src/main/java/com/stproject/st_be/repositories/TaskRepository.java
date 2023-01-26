@@ -53,7 +53,7 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
 
     @Query(value = "SELECT task " +
             "FROM Task task " +
-            "JOIN task.tenants t " +
-            "WHERE t.id = :tenantId AND task.whenToBeDone < task.finishedOnDate")
+            "JOIN task.tenants tenants " +
+            "WHERE tenants.id = :tenantId AND task.whenToBeDone < task.finishedOnDate ")
     List<Task> findAllOverdueTasksWhereTenantId(@Param("tenantId") String tenantId);
 }

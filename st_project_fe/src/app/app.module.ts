@@ -1,3 +1,4 @@
+import { TaskDelayedComponent } from './components/task/task-delayed/task-delayed.component';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 
@@ -53,6 +54,7 @@ import { StockPageComponent } from "./components/stock/stock-page/stock-page.com
 import { StockCreateComponent } from "./components/stock/stock-create/stock-create.component";
 import { StockHistoryComponent } from "./components/stock/stock-history/stock-history.component";
 import { StockEditDialogComponent } from "./components/stock/stock-edit-dialog/stock-edit-dialog.component";
+import { TaskStatisticsComponent } from './components/task/task-statistics/task-statistics.component';
 
 export const MY_FORMATS = {
   parse: {
@@ -96,6 +98,8 @@ export const MY_FORMATS = {
     StockCreateComponent,
     StockHistoryComponent,
     StockEditDialogComponent,
+    TaskDelayedComponent,
+    TaskStatisticsComponent
   ],
   imports: [
     BrowserModule,

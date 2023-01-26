@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, Subject } from 'rxjs';
+import { map, Observable, of, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Jwtobj } from '../common/jwtobj';
 import jwt_decode from 'jwt-decode';
@@ -46,6 +46,27 @@ export class TasksService {
       })
     });
   }
+
+  getDelayedTaskListPaginate(pageNumber: number, pageSize: number, tenantId: string): Observable<GetTasksResponse> {
+    const url: string = `${this.domain}/overdue/tenant/${tenantId}?pageNo=${pageNumber}&pageSize=${pageSize}`;
+    return this.http.get<GetTasksResponse>(url, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem("token")
+      })
+    });
+  }
+
+  getUserStatistics(tenantId: string | undefined): Observable<any> {
+    const url: string = `${this.domain}/overdue/tenant/average-statistics/${tenantId}`;
+    return this.http.get<GetTasksResponse>(url, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem("token")
+      })
+    });
+  }
+
   // V3 is free from tenant filtering
   searchTaskPaginate(thePage: number, thePageSize: number, theKeyword: string): Observable<GetTasksResponse> {
     const searchUrl = `${this.domain}/search?description=${theKeyword}&pageNo=${thePage}&pageSize=${thePageSize}`;

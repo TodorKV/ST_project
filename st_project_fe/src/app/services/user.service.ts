@@ -4,12 +4,13 @@ import { Observable, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../common/user';
 import { Numeric } from 'd3-array';
+import jwt_decode from 'jwt-decode';
+import { Jwtobj } from '../common/jwtobj';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
   public isAdmin: boolean = false;
 
   constructor(private http: HttpClient) { }
